@@ -34,6 +34,13 @@ jobs:
         run: |
           pytest --cov=example --cov-report=xml
 
-      # Paso 5: Verificar que el archivo coverage.xml exista (para debug)
+      # Paso 5: Debug para confirmar que coverage.xml existe
       - name: Debug coverage.xml
         run: ls -l coverage.xml
+
+      # Paso 6: Subir el archivo coverage.xml como artefacto
+      - name: Upload coverage.xml as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml
