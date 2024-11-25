@@ -29,14 +29,14 @@ jobs:
       - name: Run Tests with Coverage
         run: |
           pytest --cov=example --cov-report=xml
-        # Este paso generará un archivo `coverage.xml`
 
-      - name: Upload Coverage Report to SonarCloud
+      - name: SonarCloud Analysis
+        uses: sonarsource/sonarcloud-github-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner \
-            -Dsonar.projectKey=OmarGarciaTorres_Aseguramiento-de-la-Calidad-del-Software \
-            -Dsonar.organization=omar1 \
-            -Dsonar.host.url=https://sonarcloud.io \
+        with:
+          args: >
+            -Dsonar.projectKey=OmarGarciaTorres_Aseguramiento-de-la-Calidad-del-Software
+            -Dsonar.organization=omar1
+            -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.coverage.reportPaths=coverage.xml
