@@ -16,6 +16,11 @@ def test_add_numbers():
     assert add_numbers(2, 3) == 5
     assert add_numbers(-1, 1) == 0
 
+def test_add_numbers_large_values():
+    """Verifica que la función add_numbers maneje correctamente valores grandes."""
+    assert add_numbers(1_000_000, 2_000_000) == 3_000_000
+    assert add_numbers(-1_000_000, -2_000_000) == -3_000_000
+
 def test_is_even():
     """Verifica que la función is_even identifique correctamente números pares e impares."""
     assert is_even(4) is True
