@@ -1,4 +1,4 @@
-name: Python CI with SonarCloud
+name: CI Pipeline
 
 on:
   push:
@@ -9,38 +9,31 @@ on:
       - main
 
 jobs:
-  build:
+  test-and-coverage:
     runs-on: ubuntu-latest
 
     steps:
+      # Paso 1: Checkout del código fuente
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Paso 2: Configurar Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
+      # Paso 3: Instalar dependencias
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Paso 4: Ejecutar pruebas unitarias con cobertura
       - name: Run Tests with Coverage
         run: |
           pytest --cov=example --cov-report=xml
 
+      # Paso 5: Verificar que el archivo coverage.xml exista (opcional para debug)
       - name: Debug coverage.xml
         run: ls -l coverage.xml
-
-      - name: SonarCloud Analysis
-        uses: sonarsource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.projectKey=OmarGarciaTorres_Aseguramiento-de-la-Calidad-del-Software
-            -Dsonar.organization=omar1
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.sources=.
-            -Dsonar.python.coverage.reportPaths=coverage.xml
