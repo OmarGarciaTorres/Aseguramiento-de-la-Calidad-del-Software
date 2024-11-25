@@ -1,8 +1,4 @@
-"""
-Este módulo contiene funciones de ejemplo.
-"""
-
-def greet(name="World"):
+def greet(name="CI Pipeline"):
     """Devuelve un saludo personalizado."""
     return f"Hello, {name}!"
 
