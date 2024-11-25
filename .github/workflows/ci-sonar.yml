@@ -16,28 +16,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Paso 2: Configurar Python
+      # Paso 2: Fetch full history para blame
+      - name: Fetch full history for blame
+        run: git fetch --unshallow
+
+      # Paso 3: Configurar Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      # Paso 3: Instalar dependencias
+      # Paso 4: Instalar dependencias
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Paso 4: Ejecutar pruebas unitarias con cobertura
+      # Paso 5: Ejecutar pruebas unitarias con cobertura
       - name: Run Tests with Coverage
         run: |
-          pytest --cov=example --cov-report=xml
+          pytest --cov=example --cov-report=xml:coverage.xml --cov-report=term-missing
 
-      # Paso 5: Debug para confirmar que coverage.xml existe
+      # Paso 6: Debug coverage.xml
       - name: Debug coverage.xml
-        run: ls -l coverage.xml
+        run: cat coverage.xml
 
-      # Paso 6: Análisis en SonarCloud
+      # Paso 7: Análisis en SonarCloud
       - name: SonarCloud Analysis
         uses: sonarsource/sonarcloud-github-action@v2
         env:
