@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: Python CI with SonarCloud
 
 on:
   push:
@@ -13,22 +13,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-        pip install pylint
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-    - name: Run Tests
-      run: pytest
+      - name: Run Tests with Coverage
+        run: |
+          pytest --cov=example --cov-report=xml
+        # Este paso generará un archivo `coverage.xml`
 
-    - name: Static Code Analysis
-      run: pylint *.py
+      - name: Upload Coverage Report to SonarCloud
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=OmarGarciaTorres_Aseguramiento-de-la-Calidad-del-Software \
+            -Dsonar.organization=omar1 \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.python.coverage.reportPaths=coverage.xml
