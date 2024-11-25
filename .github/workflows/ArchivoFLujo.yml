@@ -16,7 +16,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Paso 2: Análisis en SonarCloud
+      # Paso 2: Descargar el archivo coverage.xml desde el artefacto
+      - name: Download coverage.xml artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage-report
+
+      # Paso 3: Verificar que coverage.xml esté presente
+      - name: Debug coverage.xml
+        run: ls -l coverage.xml
+
+      # Paso 4: Análisis en SonarCloud
       - name: SonarCloud Analysis
         uses: sonarsource/sonarcloud-github-action@v2
         env:
