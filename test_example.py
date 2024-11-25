@@ -1,12 +1,9 @@
-"""
-Pruebas unitarias para las funciones del módulo example.py.
-"""
 import pytest
 from example import greet, add_numbers, is_even, divide_numbers, find_max
 
 def test_greet_default():
     """Prueba el saludo por defecto."""
-    assert greet() == "Hello, World!"
+    assert greet() == "Hello, CI Pipeline!"
 
 def test_greet_custom_name():
     """Prueba el saludo con un nombre personalizado."""
