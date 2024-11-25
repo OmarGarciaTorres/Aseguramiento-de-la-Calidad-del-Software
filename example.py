@@ -1,15 +1,34 @@
 """
-Este módulo contiene un ejemplo básico para ilustrar pruebas unitarias.
+Este módulo contiene funciones para saludos y operaciones matemáticas básicas.
 """
 
-def greet(name):
+def greet(name="CI Pipeline"):
     """
-    Devuelve un saludo para el nombre dado.
-    
+    Devuelve un saludo personalizado.
     Args:
-        name (str): El nombre a saludar.
-    
+        name (str): El nombre de la persona a saludar.
     Returns:
-        str: Un saludo personalizado.
+        str: Saludo personalizado.
     """
     return f"Hello, {name}!"
+
+def add_numbers(a, b):
+    """
+    Suma dos números.
+    Args:
+        a (int): Primer número.
+        b (int): Segundo número.
+    Returns:
+        int: Resultado de la suma.
+    """
+    return a + b
+
+def is_even(number):
+    """
+    Verifica si un número es par.
+    Args:
+        number (int): Número a verificar.
+    Returns:
+        bool: True si es par, False si no lo es.
+    """
+    return number % 2 == 0
