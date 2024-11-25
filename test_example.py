@@ -20,4 +20,3 @@ def test_is_even():
     """Verifica que la función is_even identifique correctamente números pares e impares."""
     assert is_even(4) is True
     assert is_even(3) is False
-
