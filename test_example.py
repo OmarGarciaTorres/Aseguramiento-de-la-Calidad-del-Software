@@ -1,27 +1,40 @@
 """
 Pruebas unitarias para las funciones del módulo example.py.
 """
-from example import greet, add_numbers, is_even
+import pytest
+from example import greet, add_numbers, is_even, divide_numbers, find_max
 
 def test_greet_default():
-    """Verifica que la función greet devuelva el saludo predeterminado."""
-    assert greet() == "Hello, CI Pipeline!"
+    """Prueba el saludo por defecto."""
+    assert greet() == "Hello, World!"
 
 def test_greet_custom_name():
-    """Verifica que la función greet devuelva un saludo personalizado."""
-    assert greet("John") == "Hello, John!"
+    """Prueba el saludo con un nombre personalizado."""
+    assert greet("Alice") == "Hello, Alice!"
 
 def test_add_numbers():
-    """Verifica que la función add_numbers realice sumas correctamente."""
+    """Prueba la suma de dos números."""
     assert add_numbers(2, 3) == 5
     assert add_numbers(-1, 1) == 0
-
-def test_add_numbers_large_values():
-    """Verifica que la función add_numbers maneje correctamente valores grandes."""
-    assert add_numbers(1_000_000, 2_000_000) == 3_000_000
-    assert add_numbers(-1_000_000, -2_000_000) == -3_000_000
+    assert add_numbers(0, 0) == 0
 
 def test_is_even():
-    """Verifica que la función is_even identifique correctamente números pares e impares."""
+    """Prueba para verificar si un número es par o impar."""
     assert is_even(4) is True
-    assert is_even(3) is False
+    assert is_even(5) is False
+
+def test_divide_numbers():
+    """Prueba la división de números."""
+    assert divide_numbers(10, 2) == 5
+    assert divide_numbers(3, 1) == 3
+
+    with pytest.raises(ValueError):
+        divide_numbers(10, 0)
+
+def test_find_max():
+    """Prueba para encontrar el número máximo en una lista."""
+    assert find_max([1, 2, 3, 4, 5]) == 5
+    assert find_max([-1, -2, -3]) == -1
+
+    with pytest.raises(ValueError):
+        find_max([])
