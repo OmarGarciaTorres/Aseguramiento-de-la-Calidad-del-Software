@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Paso 2: Fetch full history para blame
+      # Paso 2: Fetch full history para blame (opcional pero recomendado)
       - name: Fetch full history for blame
         run: git fetch --unshallow
 
@@ -37,7 +37,7 @@ jobs:
         run: |
           pytest --cov=example --cov-report=xml:coverage.xml --cov-report=term-missing
 
-      # Paso 6: Debug coverage.xml
+      # Paso 6: Debug coverage.xml para verificar paths
       - name: Debug coverage.xml
         run: cat coverage.xml
 
@@ -53,3 +53,4 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.sources=.
+            -Dsonar.sourceEncoding=UTF-8
