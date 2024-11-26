@@ -37,7 +37,6 @@ jobs:
         run: |
           pytest --cov=example --cov-report=xml:coverage.xml --cov-report=term-missing
 
-
       # Paso 6: Debug coverage.xml para verificar paths
       - name: Debug coverage.xml
         run: cat coverage.xml
