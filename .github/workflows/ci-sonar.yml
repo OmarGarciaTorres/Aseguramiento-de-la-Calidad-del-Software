@@ -35,7 +35,8 @@ jobs:
       # Paso 5: Ejecutar pruebas unitarias con cobertura
       - name: Run Tests with Coverage
         run: |
-          pytest --cov=example --cov-report=term-missing
+          pytest --cov=example --cov-report=xml:coverage.xml --cov-report=term-missing
+
 
       # Paso 6: Debug coverage.xml para verificar paths
       - name: Debug coverage.xml
