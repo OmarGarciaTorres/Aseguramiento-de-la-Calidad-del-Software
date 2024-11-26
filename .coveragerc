@@ -1,2 +1,7 @@
 [run]
-source = example
+source = .
+
+[paths]
+source =
+    .
+    /home/runner/work/Aseguramiento-de-la-Calidad-del-Software/Aseguramiento-de-la-Calidad-del-Software
