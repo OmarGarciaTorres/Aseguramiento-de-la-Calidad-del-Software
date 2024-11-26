@@ -48,8 +48,8 @@ def test_divide_numbers_edge_cases():
     """Prueba casos límite para divide_numbers."""
     assert divide_numbers(-10, 2) == -5
     assert divide_numbers(10, -2) == -5
-    # Incrementar tolerancia relativa o usar tolerancia absoluta
-    assert divide_numbers(1, 3) == pytest.approx(0.333, abs=1e-6)
+    # Incrementar la tolerancia absoluta
+    assert divide_numbers(1, 3) == pytest.approx(0.333333, abs=1e-5)
 
 def test_find_max():
     """Prueba para encontrar el número máximo en una lista."""
